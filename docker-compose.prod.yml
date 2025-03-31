@@ -1,0 +1,22 @@
+version: '3.8'
+
+# Arquivo de configuração para ambiente de produção
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=production
+    command: npm start
+    # Sem volumes para modo de produção (usa o código no build)
+      
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    # Sem volumes para modo de produção (usa o código no build)
+    environment:
+      - NODE_ENV=production 

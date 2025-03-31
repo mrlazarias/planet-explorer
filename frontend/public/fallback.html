@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Explorer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 {
+            color: #64b5f6;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        h2 {
+            color: #81c784;
+            margin-top: 2rem;
+        }
+        .message {
+            background-color: rgba(33, 33, 33, 0.7);
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .api-link {
+            color: #ff8a65;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .api-link:hover {
+            text-decoration: underline;
+        }
+        .credentials {
+            background-color: rgba(55, 55, 55, 0.5);
+            border-left: 4px solid #64b5f6;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Planet Explorer</h1>
+        
+        <div class="message">
+            <p>Bem-vindo ao Sistema Planet Explorer - um aplicativo para explorar informações sobre planetas do nosso sistema solar.</p>
+            <p>Esta é uma página de fallback simples enquanto o frontend completo está em construção ou enfrentando problemas técnicos.</p>
+        </div>
+        
+        <h2>Acesso à API</h2>
+        <p>A API está disponível em: <a href="http://localhost:3000/api" class="api-link">http://localhost:3000/api</a></p>
+        
+        <div class="credentials">
+            <h3>Credenciais de Acesso:</h3>
+            <p><strong>Username:</strong> newadmin</p>
+            <p><strong>Password:</strong> password123</p>
+        </div>
+        
+        <h2>Rotas Disponíveis:</h2>
+        <ul>
+            <li>Login: POST /api/users/login</li>
+            <li>Registro: POST /api/users/register</li>
+            <li>Listar Planetas: GET /api/planets</li>
+        </ul>
+        
+        <p>Para acessar a API, use o token JWT retornado após o login no cabeçalho de autorização: <code>Authorization: Bearer &lt;token&gt;</code></p>
+    </div>
+</body>
+</html> 
