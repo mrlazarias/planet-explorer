@@ -1,0 +1,396 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 25% 5%;
+    --foreground: 213 31% 91%;
+    
+    --card: 230 25% 7%;
+    --card-foreground: 213 31% 91%;
+    
+    --popover: 230 25% 7%;
+    --popover-foreground: 213 31% 91%;
+    
+    --primary: 217 77% 58%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 220 40% 15%;
+    --secondary-foreground: 213 31% 91%;
+    
+    --muted: 220 40% 15%;
+    --muted-foreground: 215 20% 65%;
+    
+    --accent: 245 55% 67%;
+    --accent-foreground: 210 40% 98%;
+    
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 142 69% 38%;
+    --success-foreground: 210 40% 98%;
+    
+    --border: 215 27% 15%;
+    --input: 215 27% 15%;
+    --ring: 224 71% 56%;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html, body {
+    @apply bg-background text-foreground;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  /* Animação sutil de fade-in para toda a aplicação */
+  body > #app {
+    opacity: 0;
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Scrollbar personalizado para tema espacial */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-secondary rounded-full;
+    border: 2px solid hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+/* Background estelar avançado com paralaxe */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  transform: translateZ(0);
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.4);
+  animation: twinkle var(--duration, 5s) infinite ease-in-out;
+}
+
+.star:nth-child(5n) {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 3px 1px rgba(135, 206, 250, 0.4);
+}
+
+.star:nth-child(7n) {
+  width: 1px;
+  height: 1px;
+  box-shadow: 0 0 2px 1px rgba(255, 223, 186, 0.4);
+}
+
+.star:nth-child(11n) {
+  width: 2px;
+  height: 2px;
+  box-shadow: 0 0 4px 1px rgba(195, 177, 225, 0.6);
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+/* Nebulosa de fundo */
+.nebula {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(76, 0, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 80% 70%, rgba(0, 132, 255, 0.07) 0%, transparent 25%),
+    radial-gradient(circle at 50% 50%, rgba(217, 64, 236, 0.05) 0%, transparent 35%);
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.8;
+}
+
+/* Elementos flutuantes com efeito de hover */
+.planet-card {
+  @apply relative overflow-hidden rounded-xl bg-gradient-to-b from-card/90 to-card/70 p-6 shadow-xl transition-all border border-border/50;
+  backdrop-filter: blur(8px);
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.21, 0.6, 0.44, 1);
+}
+
+.planet-card:hover {
+  @apply shadow-2xl border-accent/30;
+  transform: translateY(-4px);
+}
+
+.planet-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.planet-card:hover::before {
+  opacity: 1;
+}
+
+.planet-card:hover .planet-image {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.planet-image {
+  @apply transition-transform duration-500;
+  transform-origin: center;
+}
+
+/* Botões com animações e efeitos */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-md transition-all;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  @apply shadow-lg;
+  transform: translateY(-1px);
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-primary:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-ring;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground shadow-md transition-all;
+}
+
+.btn-secondary:hover {
+  @apply shadow-lg;
+  transform: translateY(-1px);
+  background-color: hsl(var(--secondary) / 0.9);
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/10 hover:text-accent-foreground transition-all;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-foreground hover:bg-accent/10 hover:text-accent-foreground transition-all;
+}
+
+/* Formulários estilizados */
+.input {
+  @apply flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground;
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--secondary) / 0.2),
+    transparent
+  );
+}
+
+.input:focus {
+  @apply outline-none ring-2 ring-ring ring-offset-1 ring-offset-background;
+}
+
+.textarea {
+  @apply flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground;
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--secondary) / 0.2),
+    transparent
+  );
+}
+
+.textarea:focus {
+  @apply outline-none ring-2 ring-ring ring-offset-1 ring-offset-background;
+}
+
+.label {
+  @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+}
+
+/* Cards e componentes de layout */
+.card {
+  @apply rounded-lg border bg-card text-card-foreground shadow-md overflow-hidden;
+  position: relative;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--primary) / 0.5),
+    hsl(var(--accent) / 0.5),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card-header {
+  @apply flex flex-col space-y-1.5 p-6;
+}
+
+.card-title {
+  @apply font-heading text-xl font-semibold leading-none tracking-tight;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--foreground)),
+    hsl(var(--primary)),
+    hsl(var(--foreground))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shine 8s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.card-description {
+  @apply text-sm text-muted-foreground;
+}
+
+.card-content {
+  @apply p-6 pt-0;
+}
+
+.card-footer {
+  @apply flex items-center p-6 pt-0;
+}
+
+/* Estados de carregamento */
+.loading-indicator {
+  @apply flex items-center justify-center py-4;
+}
+
+.loading-spinner {
+  @apply h-6 w-6 animate-spin text-primary;
+  filter: drop-shadow(0 0 0.5rem hsl(var(--primary) / 0.4));
+}
+
+/* Toast notifications */
+.toast {
+  @apply pointer-events-auto flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 shadow-lg transition-all;
+  backdrop-filter: blur(8px);
+}
+
+.toast-success {
+  @apply border-success/30 bg-success/10 text-success-foreground;
+}
+
+.toast-error {
+  @apply border-destructive/30 bg-destructive/10 text-destructive-foreground;
+}
+
+/* Decorações de fundo */
+.orbital-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed hsla(var(--border) / 0.3);
+  pointer-events: none;
+}
+
+/* Efeitos de transição de página */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+} 
